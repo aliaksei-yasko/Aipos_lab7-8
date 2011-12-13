@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2.1-hudson-28-. --><xs:schema xmlns:tns="http://service.alex/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://service.alex/">
+
+<xs:element name="addWeapon" type="tns:addWeapon" />
+
+<xs:element name="addWeaponResponse" type="tns:addWeaponResponse" />
+
+<xs:element name="deleteWeapon" type="tns:deleteWeapon" />
+
+<xs:element name="deleteWeaponResponse" type="tns:deleteWeaponResponse" />
+
+<xs:element name="getWeaponByName" type="tns:getWeaponByName" />
+
+<xs:element name="getWeaponByNameResponse" type="tns:getWeaponByNameResponse" />
+
+<xs:element name="getWeapons" type="tns:getWeapons" />
+
+<xs:element name="getWeaponsResponse" type="tns:getWeaponsResponse" />
+
+<xs:element name="weaponXML" type="tns:weaponXML" />
+
+<xs:element name="weaponsList" type="tns:weaponsList" />
+
+<xs:complexType name="getWeapons">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="getWeaponsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:weaponsList" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="weaponsList">
+<xs:sequence>
+<xs:element name="list" type="tns:weaponXML" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="weaponXML">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0" />
+<xs:element name="type" type="xs:string" minOccurs="0" />
+<xs:element name="weight" type="xs:double" />
+<xs:element name="length" type="xs:double" />
+<xs:element name="caliber" type="xs:double" />
+<xs:element name="spead" type="xs:double" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteWeapon">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteWeaponResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getWeaponByName">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getWeaponByNameResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:weaponXML" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addWeapon">
+<xs:sequence>
+<xs:element name="xmlWeapon" type="tns:weaponXML" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addWeaponResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
