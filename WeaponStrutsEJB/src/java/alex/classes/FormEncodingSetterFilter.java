@@ -8,6 +8,11 @@ package alex.classes;
 import java.io.*;
 import javax.servlet.*;
 
+/**
+ *
+ * @author Alexei Yasko
+ */
+
 public class FormEncodingSetterFilter implements Filter{
 
     private static final String FILTERABLE_CONTENT_TYPE="application/x-www-form-urlencoded";

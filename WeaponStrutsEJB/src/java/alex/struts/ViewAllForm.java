@@ -13,7 +13,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author Admin
+ * @author Alexei Yasko
  */
 public class ViewAllForm extends org.apache.struts.action.ActionForm {
     

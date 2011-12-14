@@ -10,7 +10,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author Admin
+ * @author Alexei Yasko
  */
 @Local
 public interface WeaponsFacadeLocal {

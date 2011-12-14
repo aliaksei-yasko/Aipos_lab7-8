@@ -12,7 +12,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author Admin
+ * @author Alexei Yasko
  */
 public class ChangeWeaponForm extends org.apache.struts.action.ActionForm {
     

@@ -13,7 +13,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Admin
+ * @author Alexei Yasko
+ * Class that present weapons in xml form
  */
 
 @XmlRootElement

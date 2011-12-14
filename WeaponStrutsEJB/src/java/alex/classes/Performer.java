@@ -5,33 +5,58 @@
 
 package alex.classes;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
 /**
  *
- * @author Admin
+ * @author Alexei Yasko
+ * Class that perform all basic function whith weapon service
  */
 public class Performer {
-    Connection connection = null;
 
     public Performer() {
         
     }
 
-    public boolean changeWeapon (Weapon updateWeapon, String oldName) throws SQLException {
-       return true;
+    /**
+     *
+     * Function that change information about weapon
+     * @param updateWeapon new information about weapon
+     * @param oldName old name of changing weapon
+     * @return logical result of operation
+     */
+    public boolean changeWeapon (Weapon updateWeapon, String oldName) {
+        try {
+            /* Create xml that will be present information about weapon */
+            WeaponXML xmlWeapon = new WeaponXML();
+
+            xmlWeapon.setName(updateWeapon.getName());
+            xmlWeapon.setType(updateWeapon.getType());
+            xmlWeapon.setWeight(updateWeapon.getWeight());
+            xmlWeapon.setLength(updateWeapon.getLength());
+            xmlWeapon.setCaliber(updateWeapon.getCaliber());
+            xmlWeapon.setSpead(updateWeapon.getSpeadOfTheBullet());
+
+            /* Execute service method */
+            WeaponServiceService service = new WeaponServiceService();
+            WeaponService port = service.getWeaponServicePort();
+            boolean result = port.changeWeapon(xmlWeapon, oldName);
+
+            return result;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
+    /**
+     * Function that getting information about weapon
+     * whith some name
+     * @param nameWeapon - name of the weapon
+     * @return weapons found
+     */
     public Weapon getWeaponByName(String nameWeapon) {
         try {
+            /* Execute service method */
             WeaponServiceService service = new WeaponServiceService();
             WeaponService port = service.getWeaponServicePort();
             WeaponXML result = port.getWeaponByName(nameWeapon);
@@ -45,8 +70,14 @@ public class Performer {
         }
     }
 
+    /**
+     * Function that added weapon on the service
+     * @param newWeapon weapon that we added
+     * @return logical result of operation
+     */
     public boolean addWeapon(Weapon newWeapon) {
         try {
+            /* Create xml that will be present information about weapon */
             WeaponXML xmlWeapon = new WeaponXML();
 
             xmlWeapon.setName(newWeapon.getName());
@@ -56,6 +87,7 @@ public class Performer {
             xmlWeapon.setCaliber(newWeapon.getCaliber());
             xmlWeapon.setSpead(newWeapon.getSpeadOfTheBullet());
 
+            /* Execute service method */
             WeaponServiceService service = new WeaponServiceService();
             WeaponService port = service.getWeaponServicePort();
             boolean result = port.addWeapon(xmlWeapon);
@@ -67,8 +99,14 @@ public class Performer {
         }
     }
 
+    /**
+     * Function that delete weapon from service
+     * @param weaponName deleted weapon name
+     * @return logical result of operation
+     */
     public boolean deleteWeapon(String weaponName){
         try {
+            /* Execute service method */
             WeaponServiceService service = new WeaponServiceService();
             WeaponService port = service.getWeaponServicePort();
             boolean result = port.deleteWeapon(weaponName);
@@ -79,9 +117,14 @@ public class Performer {
         }
     }
 
+    /**
+     * Function that getting all weapon of service
+     * @return all found weapon
+     */
     public Weapon[] getAllWeapon(){
 
         try {
+            /* Execute service method */
             WeaponServiceService service = new WeaponServiceService();
             WeaponService port = service.getWeaponServicePort();
             WeaponsList result = port.getWeapons();
@@ -89,6 +132,7 @@ public class Performer {
 
             int i = 0;
 
+            /* Convert to our weapon class */
             for (WeaponXML xmlWeapon : result.getList()) {
                 Weapon weapon = new Weapon();
                 weapon.XmlToWeapon(xmlWeapon);

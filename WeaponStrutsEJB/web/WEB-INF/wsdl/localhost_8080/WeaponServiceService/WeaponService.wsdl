@@ -3,17 +3,21 @@
 <wsat:ATAlwaysCapability />
 <wsat:ATAssertion xmlns:ns1="http://schemas.xmlsoap.org/ws/2002/12/policy" wsp:Optional="true" ns1:Optional="true" />
 </wsp:Policy>
-<wsp:Policy xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" wsu:Id="WeaponServicePortBinding_deleteWeapon_WSAT_Policy">
+<wsp:Policy xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" wsu:Id="WeaponServicePortBinding_changeWeapon_WSAT_Policy">
 <wsat:ATAlwaysCapability />
 <wsat:ATAssertion xmlns:ns2="http://schemas.xmlsoap.org/ws/2002/12/policy" wsp:Optional="true" ns2:Optional="true" />
 </wsp:Policy>
-<wsp:Policy xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" wsu:Id="WeaponServicePortBinding_getWeapons_WSAT_Policy">
+<wsp:Policy xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" wsu:Id="WeaponServicePortBinding_deleteWeapon_WSAT_Policy">
 <wsat:ATAlwaysCapability />
 <wsat:ATAssertion xmlns:ns3="http://schemas.xmlsoap.org/ws/2002/12/policy" wsp:Optional="true" ns3:Optional="true" />
 </wsp:Policy>
-<wsp:Policy xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" wsu:Id="WeaponServicePortBinding_getWeaponByName_WSAT_Policy">
+<wsp:Policy xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" wsu:Id="WeaponServicePortBinding_getWeapons_WSAT_Policy">
 <wsat:ATAlwaysCapability />
 <wsat:ATAssertion xmlns:ns4="http://schemas.xmlsoap.org/ws/2002/12/policy" wsp:Optional="true" ns4:Optional="true" />
+</wsp:Policy>
+<wsp:Policy xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" wsu:Id="WeaponServicePortBinding_getWeaponByName_WSAT_Policy">
+<wsat:ATAlwaysCapability />
+<wsat:ATAssertion xmlns:ns5="http://schemas.xmlsoap.org/ws/2002/12/policy" wsp:Optional="true" ns5:Optional="true" />
 </wsp:Policy>
 <types>
 <xsd:schema>
@@ -44,6 +48,12 @@
 <message name="addWeaponResponse">
 <part name="parameters" element="tns:addWeaponResponse" />
 </message>
+<message name="changeWeapon">
+<part name="parameters" element="tns:changeWeapon" />
+</message>
+<message name="changeWeaponResponse">
+<part name="parameters" element="tns:changeWeaponResponse" />
+</message>
 <portType name="WeaponService">
 <operation name="getWeapons">
 <input wsam:Action="http://service.alex/WeaponService/getWeaponsRequest" message="tns:getWeapons" />
@@ -60,6 +70,10 @@
 <operation name="addWeapon">
 <input wsam:Action="http://service.alex/WeaponService/addWeaponRequest" message="tns:addWeapon" />
 <output wsam:Action="http://service.alex/WeaponService/addWeaponResponse" message="tns:addWeaponResponse" />
+</operation>
+<operation name="changeWeapon">
+<input wsam:Action="http://service.alex/WeaponService/changeWeaponRequest" message="tns:changeWeapon" />
+<output wsam:Action="http://service.alex/WeaponService/changeWeaponResponse" message="tns:changeWeaponResponse" />
 </operation>
 </portType>
 <binding name="WeaponServicePortBinding" type="tns:WeaponService">
@@ -109,6 +123,18 @@
 </input>
 <output>
 <wsp:PolicyReference URI="#WeaponServicePortBinding_addWeapon_WSAT_Policy" />
+<soap:body use="literal" />
+</output>
+</operation>
+<operation name="changeWeapon">
+<wsp:PolicyReference URI="#WeaponServicePortBinding_changeWeapon_WSAT_Policy" />
+<soap:operation soapAction="" />
+<input>
+<wsp:PolicyReference URI="#WeaponServicePortBinding_changeWeapon_WSAT_Policy" />
+<soap:body use="literal" />
+</input>
+<output>
+<wsp:PolicyReference URI="#WeaponServicePortBinding_changeWeapon_WSAT_Policy" />
 <soap:body use="literal" />
 </output>
 </operation>

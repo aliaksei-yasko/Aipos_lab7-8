@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Admin
+ * @author Alexei Yasko
  */
 @Stateless
 public class WeaponsFacade extends AbstractFacade<Weapons> implements WeaponsFacadeLocal {

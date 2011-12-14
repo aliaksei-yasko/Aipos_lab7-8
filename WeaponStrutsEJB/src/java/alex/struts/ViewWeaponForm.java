@@ -9,11 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
 
 /**
  *
- * @author Admin
+ * @author Alexei Yasko
  */
 public class ViewWeaponForm extends org.apache.struts.action.ActionForm {
     

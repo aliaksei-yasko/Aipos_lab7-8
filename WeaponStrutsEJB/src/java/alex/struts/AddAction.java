@@ -15,7 +15,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author Admin
+ * @author Alexei Yasko
  */
 public class AddAction extends org.apache.struts.action.Action {
     

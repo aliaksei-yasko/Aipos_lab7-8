@@ -16,7 +16,8 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Admin
+ * @author Alexei Yasko
+ * Entity class of weapons table
  */
 @Entity
 @Table(name = "WEAPONS")

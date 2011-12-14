@@ -4,6 +4,10 @@
 
 <xs:element name="addWeaponResponse" type="tns:addWeaponResponse" />
 
+<xs:element name="changeWeapon" type="tns:changeWeapon" />
+
+<xs:element name="changeWeaponResponse" type="tns:changeWeaponResponse" />
+
 <xs:element name="deleteWeapon" type="tns:deleteWeapon" />
 
 <xs:element name="deleteWeaponResponse" type="tns:deleteWeaponResponse" />
@@ -54,6 +58,19 @@
 </xs:complexType>
 
 <xs:complexType name="deleteWeaponResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="changeWeapon">
+<xs:sequence>
+<xs:element name="xmlWeapon" type="tns:weaponXML" minOccurs="0" />
+<xs:element name="oldName" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="changeWeaponResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean" />
 </xs:sequence>
