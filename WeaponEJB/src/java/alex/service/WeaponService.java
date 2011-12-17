@@ -6,13 +6,13 @@
 package alex.service;
 
 import alex.ejbbeans.Weapons;
+import alex.ejbbeans.WeaponsFacadeLocal;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.ejb.Stateless;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -22,8 +22,8 @@ import javax.persistence.PersistenceContext;
 @WebService()
 @Stateless()
 public class WeaponService {
-    @PersistenceContext
-    private EntityManager em;
+    @EJB
+    private WeaponsFacadeLocal wf;
 
     /**
      * Method that get all weapons
@@ -31,7 +31,7 @@ public class WeaponService {
      */
     @WebMethod(operationName = "getWeapons")
     public WeaponsList getWeapons() {
-        List<Weapons> list = em.createNamedQuery("Weapons.findAll").getResultList();
+        List<Weapons> list = wf.findAll();
         WeaponsList result = new WeaponsList(list);
         return result;
     }
@@ -43,7 +43,7 @@ public class WeaponService {
      */
     @WebMethod(operationName = "getWeaponByName")
     public WeaponXML getWeaponByName(@WebParam(name = "name") String name) {
-        Weapons weapon = em.find(Weapons.class, name);
+        Weapons weapon = wf.find(name);
         WeaponXML xmlWeapon = new WeaponXML(weapon);
         return xmlWeapon;
     }
@@ -55,12 +55,12 @@ public class WeaponService {
      */
     @WebMethod(operationName = "deleteWeapon")
     public boolean deleteWeapon(@WebParam(name = "name") String name) {
-        Object entity = null;
-        entity = em.find(Weapons.class, name);
+        Weapons entity = null;
+        entity = wf.find(name);
         if (entity == null) {
             return false;
         } else {
-            em.remove(entity);
+            wf.remove(entity);
             return true;
         }
     }
@@ -81,7 +81,7 @@ public class WeaponService {
         weapon.setCaliberweapon(xmlWeapon.caliber);
         weapon.setSpeadweapon(xmlWeapon.spead);
 
-        em.persist(weapon);
+        wf.create(weapon);
 
         return true;
     }
@@ -97,7 +97,7 @@ public class WeaponService {
             @WebParam(name = "oldName") String oldName) {
 
         Weapons weapon = null;
-        weapon = em.find(Weapons.class, oldName);
+        weapon = wf.find(oldName);
         if (weapon != null) {
 
             weapon.setNameweapon(xmlWeapon.name);
@@ -107,7 +107,7 @@ public class WeaponService {
             weapon.setCaliberweapon(xmlWeapon.caliber);
             weapon.setSpeadweapon(xmlWeapon.spead);
 
-            em.persist(weapon);
+            wf.edit(weapon);
             return true;
 
         } else {
